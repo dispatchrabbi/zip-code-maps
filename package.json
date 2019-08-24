@@ -1,0 +1,17 @@
+{
+  "name": "zip-code-maps",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "draw": "node --expose-gc ./index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@mapbox/geojson-merge": "^1.0.2",
+    "canvas": "^2.6.0",
+    "heapdump": "^0.3.14"
+  }
+}
