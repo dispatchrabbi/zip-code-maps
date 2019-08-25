@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "draw": "node --expose-gc ./index.js"
+    "draw": "node ./index.js"
   },
   "author": "",
   "license": "Apache-2.0",

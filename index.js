@@ -6,16 +6,9 @@ const { getUsBounds } = require('./get-us-bounds');
 const { drawZipsWithContext } = require('./draw');
 const COLORS = ['#f44336', '#f96e32', '#fd902d', '#ffb029', '#ffce2c', '#7aa8a6', '#6c8ec1', '#6574c8', '#6558c3', '#673ab7'];
 
-if(!global.gc) {
-  console.error('This program needs access to the garbage collector. Please run node with the --expose-gc option.');
-  process.exit(1);
-}
-
 const largestImageDimension = 960;
 const usBox = getUsBounds();
 const scale = (usBox.width() > usBox.height()) ? (largestImageDimension / usBox.width()) : (largestImageDimension / usBox.height());
-
-global.gc();
 
 console.log(`Our JSON has a ${usBox.width()} x ${usBox.height()} bounding box`);
 console.log(`To scale up to ${largestImageDimension}, that means a scale of ${scale}`);
@@ -33,7 +26,6 @@ const canvases = [1, 2, 3, 4, 5].map(place => {
 console.log('');
 
 fs.readdirSync('./data').forEach((filename, ix) => {
-  global.gc();
   if(! filename.endsWith('.json')) { return; }
 
   const state = filename.slice(0, 2).toUpperCase();
