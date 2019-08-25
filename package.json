@@ -4,13 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "draw": "node --expose-gc ./index.js",
+    "draw": "node --expose-gc ./index.js"
   },
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
-    "@mapbox/geojson-merge": "^1.0.2",
-    "canvas": "^2.6.0",
-    "heapdump": "^0.3.14"
+    "canvas": "^2.6.0"
   }
 }

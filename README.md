@@ -18,3 +18,7 @@ This one is a weekend project and is pretty rough, so give it a grain of salt.
 - `require` keeps the loaded file around whether you like it or not, so don't use it to load big JSON files. Do something like I wrote in _read-json.js_ (though, you should probably make it async).
 - Zip codes are fun!
 - Don't use d3 unless you have to (which, sometimes you do... but this time, I didn't)
+
+# Thanks
+
+A lot of this is inspired by and adapted from http://mikefowler.me/journal/2014/06/10/drawing-geojson-in-a-canvas. So... thanks!

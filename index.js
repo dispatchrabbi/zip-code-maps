@@ -1,8 +1,5 @@
 const fs = require('fs');
-const { merge } = require('@mapbox/geojson-merge');
 const Canvas = require('canvas');
-
-const { printMemoryUsage, dumpHeap } = require('./memory-usage');
 
 const { readJson } = require('./read-json');
 const { getUsBounds } = require('./get-us-bounds');
@@ -38,7 +35,6 @@ console.log('');
 fs.readdirSync('./data').forEach((filename, ix) => {
   global.gc();
   if(! filename.endsWith('.json')) { return; }
-  // if(ix > 25) { return; }
 
   const state = filename.slice(0, 2).toUpperCase();
 

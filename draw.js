@@ -1,5 +1,6 @@
 const Canvas = require('canvas');
 const { makeGeoJsonBoundingBox } = require('./geojson-bounds');
+const { mercator } = require('./projections');
 
 function drawZipsWithContext(geoJson, context, boundingBox, scale, zipToColor) {
 
@@ -27,34 +28,19 @@ function drawZipsWithContext(geoJson, context, boundingBox, scale, zipToColor) {
 function drawPolygon(polygon, context, boundingBox, scale) {
   context.beginPath();
   polygon.forEach(boundary => {
-    boundary.forEach(([long, lat], ix) => {
-      const point = scaleAndTransform({x: long, y: lat}, boundingBox, scale);
+    boundary.forEach((point, ix) => {
+      const pointToDraw = scaleAndTransform(mercator(point[0], point[1]), boundingBox, scale);
 
       if(ix === 0) {
-        context.moveTo(point.x, point.y);
+        context.moveTo(pointToDraw.x, pointToDraw.y);
       } else {
-        context.lineTo(point.x, point.y);
+        context.lineTo(pointToDraw.x, pointToDraw.y);
       }
     });
   });
 
   context.fill();
   // context.stroke();
-}
-
-// Stolen from http://mikefowler.me/journal/2014/06/10/drawing-geojson-in-a-canvas
-// unlike the rest of this, which is merely adapted
-function mercator(longitude, latitude) {
-  var radius = 6378137;
-  var max = 85.0511287798;
-  var radians = Math.PI / 180;
-  var point = {};
-
-  point.x = radius * longitude * radians;
-  point.y = Math.max(Math.min(max, latitude), -max) * radians;
-  point.y = radius * Math.log(Math.tan((Math.PI / 4) + (point.y / 2)));
-
-  return point;
 }
 
 function scaleAndTransform(point, boundingBox, scale) {

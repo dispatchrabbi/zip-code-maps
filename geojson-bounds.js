@@ -1,4 +1,5 @@
 const BoundingBox = require('./bounding-box');
+const { mercator } = require('./projections');
 
 function makeGeoJsonBoundingBox(geoJson) {
   const bbox = new BoundingBox();
@@ -9,7 +10,7 @@ function makeGeoJsonBoundingBox(geoJson) {
         feature.geometry.coordinates.forEach(
           boundary => boundary.forEach(
             point => {
-              bbox.growToPoint({x: point[0], y: point[1]})
+              bbox.growToPoint(mercator(point[0], point[1]))
             }
           )
         );
@@ -18,7 +19,7 @@ function makeGeoJsonBoundingBox(geoJson) {
           feature.geometry.coordinates.forEach(
             polygon => polygon.forEach(
               boundary => boundary.forEach(
-                point => bbox.growToPoint({x: point[0], y: point[1]})
+                point => bbox.growToPoint(mercator(point[0], point[1]))
               )
             )
           );
